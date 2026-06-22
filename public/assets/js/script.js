@@ -100,19 +100,6 @@ function createCard(lugar) {
 }
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const usuario =
-        JSON.parse(
-            sessionStorage.getItem("usuarioCorrente")
-        );
-
-    if (!usuario) {
-
-        window.location.href =
-            "./modulos/login/index.html";
-
-        return;
-    }
-
     atualizarAreaLogin();
     const lugares = await fetchItems();
     
@@ -202,14 +189,13 @@ function configurarFavoritos() {
 
                 if (!usuario) {
 
-                    alert(
-                        "Você precisa estar logado para favoritar."
-                    );
-                   window.location.href =
-                   "./modulos/login/index.html";
+                   alert("Faça login para favoritar.");
 
-                    return;
-                }
+                   window.location.href =
+                     "./modulos/login/index.html";
+
+                   return;
+}
 
                 const idLugar =
                     Number(btn.dataset.id);

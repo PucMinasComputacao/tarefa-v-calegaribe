@@ -15,12 +15,13 @@ Matrícula: 915110
 ## Prints
 
 ### Usuário logado
-
-
+![alt text](image-1.png)
+![alt text](image.png)
 
 ### Destino favoritado
 
-
+![alt text](image-2.png)
 
 ### Página Meus Favoritos
 
+![alt text](image-3.png)
