@@ -5,6 +5,14 @@ async function fetchItems() {
         }, 50);
     });
 }
+
+function logoutUser() {
+    sessionStorage.removeItem("usuarioCorrente");
+
+    window.location.href =
+        "./modulos/login/index.html";
+}
+
 function getUsuarioLogado() {
     return JSON.parse(sessionStorage.getItem("usuarioCorrente"));
 }
@@ -91,6 +99,20 @@ function createCard(lugar) {
     return cardCol;
 }
 document.addEventListener("DOMContentLoaded", async () => {
+
+    const usuario =
+        JSON.parse(
+            sessionStorage.getItem("usuarioCorrente")
+        );
+
+    if (!usuario) {
+
+        window.location.href =
+            "./modulos/login/index.html";
+
+        return;
+    }
+
     atualizarAreaLogin();
     const lugares = await fetchItems();
     
@@ -133,14 +155,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     configurarFavoritos();
 }
 
-    function atualizarAreaLogin() {
-    const area = document.getElementById("login-area");
+        function atualizarAreaLogin() {
+            const area =
+        document.getElementById("login-area");
+
+    if (!area) return;
 
     const usuario = JSON.parse(sessionStorage.getItem("usuarioCorrente"));
 
     if (usuario) {
         area.innerHTML = `
-            <span class="text-white">
+            <span class="text-white">   
                 Olá, ${usuario.nome}
             </span>
             |
@@ -158,10 +183,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } else {
         area.innerHTML = `
-            <a <a href="index.html" class="nav-link">
-                Entrar
-            </a>
-        `;
+         <a href="./modulos/login/index.html"
+             class="nav-link">
+             Entrar
+         </a>
+       `;
     }
 }
 function configurarFavoritos() {
@@ -179,9 +205,8 @@ function configurarFavoritos() {
                     alert(
                         "Você precisa estar logado para favoritar."
                     );
-
-                    window.location.href =
-                        "index.html";
+                   window.location.href =
+                   "./modulos/login/index.html";
 
                     return;
                 }
